@@ -1,16 +1,7 @@
-export class TodoModel {
-  public date_created: string;
-  public date_to_complete_by: string;
-  public completed: boolean;
-  public title: string;
-  public description: string;
-  public id: string;
+import { NewTodoModel } from "../newTodoModel/newTodoModel";
 
-  static STR_DATE_CREATED = "date_created";
-  static STR_DATE_TO_COMPLETE_BY = "date_to_complete_by";
-  static BOOL_COMPLETED = "completed";
-  static STR_TITLE = "title";
-  static STR_DESCRIPTION = "description";
+export class TodoModel extends NewTodoModel {
+  public id: string;
   static STR_ID = "id";
 
   constructor(
@@ -21,11 +12,7 @@ export class TodoModel {
     strDescription: string,
     strId?: string
   ) {
-    this.date_created = dateCreated;
-    this.date_to_complete_by = dateToCompleteBy;
-    this.completed = bCompleted;
-    this.title = strTitle;
-    this.description = strDescription;
+    super(dateCreated, dateToCompleteBy, bCompleted, strTitle, strDescription);
     this.id = strId || "";
   }
 }

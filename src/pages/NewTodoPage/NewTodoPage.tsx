@@ -1,7 +1,9 @@
 import React from "react";
+//components:
+import NewTodo from "../../components/NewTodo";
 
 const NewTodoPage = () => {
-  return <div>New todo page</div>;
+  return <NewTodo />;
 };
 
 export default NewTodoPage;
