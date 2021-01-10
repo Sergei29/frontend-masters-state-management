@@ -2,12 +2,15 @@ import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
 
 export type RootStateType = {
-  todo: StateType;
-  nasa: StateType;
+  todo: TodoStateType;
+  nasa: NasaStateType;
 };
 
-export type StateType = {
-  data: null | string | Record<string, any>[] | Record<string, any>;
+export type NasaStateType = Record<string, any>;
+
+export type TodoStateType = {
+  data: Record<string, any>[];
+  current: Record<string, any>;
   loading: boolean;
   error: null | string;
 };
