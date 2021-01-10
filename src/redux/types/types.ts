@@ -1,3 +1,8 @@
+export type RootStateType = {
+  todo: StateType;
+  nasa: StateType;
+};
+
 export type StateType = {
   data: null | any[] | Record<string, any>;
   loading: boolean;

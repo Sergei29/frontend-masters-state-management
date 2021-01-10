@@ -1,17 +1,9 @@
-import { ActionType, StateType } from "../types/types";
+import { combineReducers } from "redux";
+import { todoReducer } from "./todo/todoReducer";
+import { nasaReducer } from "./nasa/nasaReducer";
+import { RootStateType } from "../types/types";
 
-const INITIAL_STATE = {
-  data: null,
-  loading: false,
-  error: null,
-};
-
-export const rootReducer = (
-  state: StateType = INITIAL_STATE,
-  action: ActionType
-) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+export const rootReducer = combineReducers<RootStateType>({
+  todo: todoReducer,
+  nasa: nasaReducer,
+});
