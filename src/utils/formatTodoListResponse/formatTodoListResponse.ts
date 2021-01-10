@@ -10,16 +10,16 @@ export const formatTodoListResponse = (
 ): Record<string, any>[] => {
   return Object.keys(objResponseData).map((strTodoId: string) => {
     const {
-      [TodoModel.STR_DATE_CREATED]: dateCreated,
-      [TodoModel.STR_DATE_TO_COMPLETE_BY]: dateToCompleteBy,
+      [TodoModel.STR_DATE_CREATED]: strDateCreated,
+      [TodoModel.STR_DATE_TO_COMPLETE_BY]: strDateToCompleteBy,
       [TodoModel.BOOL_COMPLETED]: bCompleted,
       [TodoModel.STR_TITLE]: strTitle,
       [TodoModel.STR_DESCRIPTION]: strDescription,
     } = objResponseData[strTodoId];
 
     return new TodoModel(
-      dateCreated,
-      dateToCompleteBy,
+      strDateCreated,
+      strDateToCompleteBy,
       bCompleted,
       strTitle,
       strDescription,

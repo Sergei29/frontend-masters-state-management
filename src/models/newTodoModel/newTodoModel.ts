@@ -13,14 +13,14 @@ export class NewTodoModel {
   static STR_ID = "id";
 
   constructor(
-    dateCreated: string,
-    dateToCompleteBy: string,
+    strDateCreated: string,
+    strDateToCompleteBy: string,
     bCompleted: boolean,
     strTitle: string,
     strDescription: string
   ) {
-    this.date_created = dateCreated;
-    this.date_to_complete_by = dateToCompleteBy;
+    this.date_created = strDateCreated;
+    this.date_to_complete_by = strDateToCompleteBy;
     this.completed = bCompleted;
     this.title = strTitle;
     this.description = strDescription;

@@ -1,15 +1,24 @@
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  Button,
+} from "@material-ui/core";
 import { useTodoList } from "./useTodoList";
 import { TodoModel } from "../../models/todoModel/todoModel";
+//components:
+import TodoSummary from "../TodoSummary";
 //styles:
 import { style, ClassesType } from "./style";
 
 type Props = {
   classes: ClassesType;
-};
-const TodoList: React.FC<Props> = ({ classes }) => {
+} & RouteComponentProps;
+const TodoList: React.FC<Props> = ({ classes, history }) => {
   const { loading, data, error } = useTodoList();
 
   if (loading)
@@ -27,19 +36,35 @@ const TodoList: React.FC<Props> = ({ classes }) => {
     );
   }
 
+  const funcAddTodo = () => history.push("/todo_new");
+
   return (
     <Card>
       <CardContent className={classes.todoList}>
         {data &&
           data.length &&
           data.map((objTodo: InstanceType<typeof TodoModel>) => (
-            <Typography variant="h5" align="center" key={objTodo.id}>
-              {objTodo.title}
-            </Typography>
+            <TodoSummary
+              key={objTodo.id}
+              strDateCreated={objTodo.date_created}
+              strDateToCompleteBy={objTodo.date_to_complete_by}
+              strDescription={objTodo.description}
+              strId={objTodo.id}
+              strTitle={objTodo.title}
+              bCompleted={objTodo.completed}
+            />
           ))}
       </CardContent>
+      <CardActions>
+        <Button
+          onClick={funcAddTodo}
+          className={classes.todoList__callToAction}
+        >
+          Add Todo
+        </Button>
+      </CardActions>
     </Card>
   );
 };
 
-export default withStyles(style)(TodoList);
+export default withStyles(style)(withRouter(TodoList));

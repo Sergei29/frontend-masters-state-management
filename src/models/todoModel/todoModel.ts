@@ -5,14 +5,20 @@ export class TodoModel extends NewTodoModel {
   static STR_ID = "id";
 
   constructor(
-    dateCreated: string,
-    dateToCompleteBy: string,
+    strDateCreated: string,
+    strDateToCompleteBy: string,
     bCompleted: boolean,
     strTitle: string,
     strDescription: string,
     strId?: string
   ) {
-    super(dateCreated, dateToCompleteBy, bCompleted, strTitle, strDescription);
+    super(
+      strDateCreated,
+      strDateToCompleteBy,
+      bCompleted,
+      strTitle,
+      strDescription
+    );
     this.id = strId || "";
   }
 }

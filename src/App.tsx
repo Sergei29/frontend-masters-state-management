@@ -15,8 +15,8 @@ const App: React.FC = () => {
       <hr />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/todo_list" component={TodoListPage} />
-        <Route path="/todo_details" component={TodoDetailsPage} />
+        <Route exact path="/todos" component={TodoListPage} />
+        <Route path="/todos/:id" component={TodoDetailsPage} />
         <Route path="/todo_new" component={NewTodoPage} />
         <Route component={NotFound} />
       </Switch>

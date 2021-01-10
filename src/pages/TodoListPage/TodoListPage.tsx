@@ -6,7 +6,7 @@ import TodoList from "../../components/TodoList";
 const TodoListPage = () => {
   return (
     <div>
-      <Typography variant="h1" align="center">
+      <Typography variant="h2" align="center">
         TodoList Page
       </Typography>
       <TodoList />
