@@ -13,5 +13,5 @@ export const useTodoList = () => {
     dispatch(fetchTodoList());
   }, [dispatch]);
 
-  return { loading, data: data as Record<string, any>, error };
+  return { loading, data, error };
 };

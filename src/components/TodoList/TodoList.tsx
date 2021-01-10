@@ -9,7 +9,6 @@ import {
   Button,
 } from "@material-ui/core";
 import { useTodoList } from "./useTodoList";
-import { TodoModel } from "../../models/todoModel/todoModel";
 //components:
 import TodoSummary from "../TodoSummary";
 //styles:
@@ -43,7 +42,7 @@ const TodoList: React.FC<Props> = ({ classes, history }) => {
       <CardContent className={classes.todoList}>
         {data &&
           data.length &&
-          data.map((objTodo: InstanceType<typeof TodoModel>) => (
+          data.map((objTodo: Record<string, any>) => (
             <TodoSummary
               key={objTodo.id}
               strDateCreated={objTodo.date_created}

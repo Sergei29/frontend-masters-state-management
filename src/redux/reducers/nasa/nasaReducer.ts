@@ -1,15 +1,11 @@
-import { ActionType, StateType } from "../../types/types";
+import { ActionType, NasaStateType } from "../../types/types";
 
-const INITIAL_STATE = {
-  data: null,
-  loading: false,
-  error: null,
-};
+const INITIAL_STATE = {};
 
 export const nasaReducer = (
-  state: StateType = INITIAL_STATE,
+  state = INITIAL_STATE,
   action: ActionType
-) => {
+): NasaStateType => {
   switch (action.type) {
     default:
       return state;
