@@ -150,3 +150,43 @@ export const deleteTodoById = (
     dispatch(deleteTodoByIdError(getErrorMessage(objError)));
   }
 };
+
+// create new todo:
+export const createTodoStart: ActionCreatorType = () => ({
+  type: todoActionType.CREATE_TODO_START,
+});
+
+export const createTodoSuccess: ActionCreatorType = (
+  objNewTodo: Record<string, any>
+) => ({
+  type: todoActionType.CREATE_TODO_SUCCESS,
+  payload: objNewTodo,
+});
+
+export const createTodoError: ActionCreatorType = (
+  strErrorMessage: string
+) => ({
+  type: todoActionType.CREATE_TODO_ERROR,
+  payload: strErrorMessage,
+});
+
+export const createTodo = (
+  objTodoDetails: Record<string, any>,
+  onSuccess: () => void = () => {}
+): ThunkActionCreatorType => async (dispatch) => {
+  dispatch(createTodoStart());
+  try {
+    const { data } = await axios.post(getTodoListUrl(), objTodoDetails);
+    if (data.error) return dispatch(createTodoError(data.error));
+
+    const objNewTodo = {
+      ...objTodoDetails,
+      id: data.name,
+    };
+
+    onSuccess();
+    dispatch(createTodoSuccess(objNewTodo));
+  } catch (objError) {
+    dispatch(createTodoError(getErrorMessage(objError)));
+  }
+};

@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import {
   FormControl,
   TextField,
@@ -11,20 +13,24 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import { NewTodoModel } from "../../models/newTodoModel/newTodoModel";
 import useForm from "./useForm";
+import { createTodo } from "../../redux/actions/todo/actions";
 // styles:
 import { style, ClassesType } from "./style";
 
 type Props = {
   classes: ClassesType;
-};
+} & RouteComponentProps;
 
-const NewTodo: React.FC<Props> = ({ classes }) => {
+const NewTodo: React.FC<Props> = ({ classes, history }) => {
+  const dispatch = useDispatch();
   const { objTodo, handleChange, handleSubmit, resetFormState } = useForm();
+  const navigateToPage = () => history.push("/todos");
+  const funcCreateNewTodo = () => dispatch(createTodo(objTodo, navigateToPage));
 
   return (
     <Card
       component="form"
-      onSubmit={handleSubmit()}
+      onSubmit={handleSubmit(funcCreateNewTodo)}
       className={classes.newTodo}
     >
       <Typography variant="h5">Create new todo:</Typography>
@@ -57,13 +63,15 @@ const NewTodo: React.FC<Props> = ({ classes }) => {
         </FormControl>
       </CardContent>
       <CardActions>
-        <Button type="submit">Submit</Button>
-        <Button type="button" onClick={resetFormState}>
+        <Button type="button" onClick={resetFormState} variant="outlined">
           Reset
+        </Button>
+        <Button type="submit" color="primary" variant="contained">
+          Submit
         </Button>
       </CardActions>
     </Card>
   );
 };
 
-export default withStyles(style)(NewTodo);
+export default withStyles(style)(withRouter(NewTodo));

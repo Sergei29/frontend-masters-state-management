@@ -17,8 +17,12 @@ export const style = (theme: Theme) =>
       margin: theme.spacing(0.5),
       backgroundColor: green[100],
       width: "40%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
     },
     todoSummary__actions: {
+      bottom: 0,
       display: "flex",
       justifyContent: "flex-end",
     },
