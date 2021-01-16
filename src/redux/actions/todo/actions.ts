@@ -103,9 +103,14 @@ export const updateTodoById = ({
     const { data } = await axios.put(getTodoByIdUrl(strTodoId), objTodoDetails);
     const state = getState();
 
-    dispatch(
-      updateTodoByIdSuccess(updateTodoList(data, strTodoId, state.todo))
-    );
+    const objNewTodoState = {
+      loading: false,
+      error: null,
+      data: updateTodoList(data, strTodoId, state.todo),
+      current: formatTodoByIdResponse(data, strTodoId),
+    };
+
+    dispatch(updateTodoByIdSuccess(objNewTodoState));
   } catch (objError) {
     dispatch(updateTodoByIdError(getErrorMessage(objError)));
   }

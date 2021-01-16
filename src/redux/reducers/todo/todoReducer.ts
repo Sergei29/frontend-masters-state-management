@@ -45,6 +45,8 @@ export const todoReducer = (
       };
 
     case todoActionType.UPDATE_TODO_SUCCESS:
+      return action.payload as TodoStateType;
+
     case todoActionType.DELETE_TODO_SUCCESS:
       return {
         ...state,
