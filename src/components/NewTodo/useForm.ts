@@ -72,7 +72,7 @@ const useForm = (objIntitialState = getIntitialState()) => {
       objEvent: React.FormEvent
     ) => {
       objEvent.preventDefault();
-      const bFormValid = funcValidateForm(objTodo);
+      const bFormValid = funcValidateForm(objTodo, objInitialFormState);
 
       if (!bFormValid) {
         alert("form invalid!");
@@ -82,7 +82,7 @@ const useForm = (objIntitialState = getIntitialState()) => {
       funcCallback();
       resetFormState();
     },
-    [objTodo, resetFormState]
+    [objTodo, resetFormState, objInitialFormState]
   );
 
   return { objTodo, handleChange, handleSubmit, resetFormState };
