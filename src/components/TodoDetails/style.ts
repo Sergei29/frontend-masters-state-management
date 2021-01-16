@@ -3,6 +3,7 @@ import { green } from "@material-ui/core/colors";
 
 export type ClassesType = {
   todoDetails: string;
+  todoDetails__actions: string;
 };
 
 export const style = (theme: Theme) =>
@@ -12,5 +13,9 @@ export const style = (theme: Theme) =>
       margin: theme.spacing(0.5),
       backgroundColor: green[100],
       width: "40%",
+    },
+    todoDetails__actions: {
+      display: "flex",
+      justifyContent: "flex-end",
     },
   });

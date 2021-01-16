@@ -7,6 +7,7 @@ import {
   getErrorMessage,
   getTodoByIdUrl,
   getTodoListUrl,
+  updateTodoList,
 } from "../../../utils/";
 
 export const fetchTodoListStart: ActionCreatorType = () => ({
@@ -44,7 +45,7 @@ export const fetchTodoByIdStart: ActionCreatorType = () => ({
 });
 
 export const fetchTodoByIdSuccess: ActionCreatorType = (
-  objTodoDetails: Record<string, any>[]
+  objTodoDetails: Record<string, any>
 ) => ({
   type: todoActionType.FETCH_TODO_BY_ID_SUCCESS,
   payload: objTodoDetails,
@@ -57,16 +58,90 @@ export const fetchTodoByIdError: ActionCreatorType = (
   payload: strErrorMessage,
 });
 
-export const fetchTodoById = (strId: string): ThunkActionCreatorType => async (
-  dispatch
-) => {
+export const fetchTodoById = (
+  strTodoId: string
+): ThunkActionCreatorType => async (dispatch) => {
   dispatch(fetchTodoByIdStart());
   try {
-    const { data } = await axios.get(getTodoByIdUrl(strId));
+    const { data } = await axios.get(getTodoByIdUrl(strTodoId));
     if (data === null) return dispatch(fetchTodoByIdError("Not found."));
 
-    dispatch(fetchTodoByIdSuccess(formatTodoByIdResponse(data, strId)));
+    dispatch(fetchTodoByIdSuccess(formatTodoByIdResponse(data, strTodoId)));
   } catch (objError) {
     dispatch(fetchTodoByIdError(getErrorMessage(objError)));
+  }
+};
+
+// Update todo by ID:
+export const updateTodoByIdStart: ActionCreatorType = () => ({
+  type: todoActionType.UPDATE_TODO_START,
+});
+
+export const updateTodoByIdSuccess: ActionCreatorType = (
+  arrNewTodos: Record<string, any>[]
+) => ({
+  type: todoActionType.UPDATE_TODO_SUCCESS,
+  payload: arrNewTodos,
+});
+
+export const updateTodoByIdError: ActionCreatorType = (
+  strErrorMessage: string
+) => ({
+  type: todoActionType.UPDATE_TODO_ERROR,
+  payload: strErrorMessage,
+});
+
+export const updateTodoById = ({
+  objTodoDetails,
+  strTodoId,
+}: Record<string, any>): ThunkActionCreatorType => async (
+  dispatch,
+  getState
+) => {
+  dispatch(updateTodoByIdStart());
+  try {
+    const { data } = await axios.put(getTodoByIdUrl(strTodoId), objTodoDetails);
+    const state = getState();
+
+    dispatch(
+      updateTodoByIdSuccess(updateTodoList(data, strTodoId, state.todo))
+    );
+  } catch (objError) {
+    dispatch(updateTodoByIdError(getErrorMessage(objError)));
+  }
+};
+
+// Delete todo by ID:
+export const deleteTodoByIdStart: ActionCreatorType = () => ({
+  type: todoActionType.DELETE_TODO_START,
+});
+
+export const deleteTodoByIdSuccess: ActionCreatorType = (
+  arrNewTodos: Record<string, any>[]
+) => ({
+  type: todoActionType.DELETE_TODO_SUCCESS,
+  payload: arrNewTodos,
+});
+
+export const deleteTodoByIdError: ActionCreatorType = (
+  strErrorMessage: string
+) => ({
+  type: todoActionType.DELETE_TODO_ERROR,
+  payload: strErrorMessage,
+});
+
+export const deleteTodoById = (
+  strTodoId: string
+): ThunkActionCreatorType => async (dispatch, getState) => {
+  dispatch(deleteTodoByIdStart());
+  try {
+    await axios.delete(getTodoByIdUrl(strTodoId));
+    const state = getState();
+    const arrNewTodos = state.todo.data.filter(
+      (objTodo) => objTodo.id !== strTodoId
+    );
+    dispatch(deleteTodoByIdSuccess(arrNewTodos));
+  } catch (objError) {
+    dispatch(deleteTodoByIdError(getErrorMessage(objError)));
   }
 };

@@ -19,6 +19,8 @@ export const todoReducer = (
   action: ActionType
 ): TodoStateType => {
   switch (action.type) {
+    case todoActionType.DELETE_TODO_START:
+    case todoActionType.UPDATE_TODO_START:
     case todoActionType.FETCH_TODO_LIST_START:
     case todoActionType.FETCH_TODO_BY_ID_START:
       return {
@@ -42,6 +44,17 @@ export const todoReducer = (
         current: action.payload as Record<string, any>,
       };
 
+    case todoActionType.UPDATE_TODO_SUCCESS:
+    case todoActionType.DELETE_TODO_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: action.payload as Record<string, any>[],
+      };
+
+    case todoActionType.DELETE_TODO_ERROR:
+    case todoActionType.UPDATE_TODO_ERROR:
     case todoActionType.FETCH_TODO_LIST_ERROR:
     case todoActionType.FETCH_TODO_BY_ID_ERROR:
       return {

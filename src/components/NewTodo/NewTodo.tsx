@@ -22,7 +22,11 @@ const NewTodo: React.FC<Props> = ({ classes }) => {
   const { objTodo, handleChange, handleSubmit, resetFormState } = useForm();
 
   return (
-    <Card component="form" onSubmit={handleSubmit} className={classes.newTodo}>
+    <Card
+      component="form"
+      onSubmit={handleSubmit()}
+      className={classes.newTodo}
+    >
       <Typography variant="h5">Create new todo:</Typography>
       <CardContent>
         <FormControl className={classes.newTodo__form}>

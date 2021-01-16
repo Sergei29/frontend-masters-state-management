@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
 import { useTodoById } from "./useTodoById";
+//components:
+import TodoEditModal from "./components/TodoEditModal";
 
 //styles:
 import { style, ClassesType } from "./style";
@@ -12,9 +21,12 @@ type Props = {
 } & RouteComponentProps;
 
 const TodoDetails: React.FC<Props> = ({ classes, match }) => {
-  const { id } = match.params as any;
+  const [bEditModal, setBEditModal] = useState<boolean>(false);
+  const funcOpenEditMOdal = () => setBEditModal(true);
+  const funcCloseEditModal = () => setBEditModal(false);
 
-  const { current, loading, error } = useTodoById(id);
+  const { current, loading, error } = useTodoById((match.params as any).id);
+
   if (loading)
     return (
       <Typography variant="h5" align="center">
@@ -44,6 +56,18 @@ const TodoDetails: React.FC<Props> = ({ classes, match }) => {
             : `To complete by: ${current.date_to_complete_by}`}
         </Typography>
       </CardContent>
+      <CardActions className={classes.todoDetails__actions}>
+        <IconButton aria-label="edit" onClick={funcOpenEditMOdal}>
+          <EditIcon />
+        </IconButton>
+      </CardActions>
+      {current && (
+        <TodoEditModal
+          objTodoData={current}
+          handleClose={funcCloseEditModal}
+          bModalOpen={bEditModal}
+        />
+      )}
     </Card>
   );
 };

@@ -2,6 +2,7 @@ import { formatTodoByIdResponse } from "./formatTodoByIdResponse/formatTodoByIdR
 import { formatTodoListResponse } from "./formatTodoListResponse/formatTodoListResponse";
 import { getErrorMessage } from "./getErrorMessage/getErrorMessage";
 import { getTodoByIdUrl, getTodoListUrl } from "./getTodoUrl/getTodoUrl";
+import { updateTodoList } from "./updateTodoList/updateTodoList";
 
 export {
   formatTodoByIdResponse,
@@ -9,4 +10,5 @@ export {
   getErrorMessage,
   getTodoByIdUrl,
   getTodoListUrl,
+  updateTodoList,
 };

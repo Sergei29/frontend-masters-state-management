@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { useDeleteTodo } from "./useDeleteTodo";
+//styles:
 import { style, ClassesType } from "./style";
 
 type Props = {
@@ -22,6 +31,8 @@ const TodoSummary: React.FC<Props> = ({
   bCompleted,
   strId,
 }) => {
+  const { deleteTodo } = useDeleteTodo(strId);
+
   return (
     <Card className={classes.todoSummary}>
       <Link to={`/todos/${strId}`}>
@@ -38,6 +49,11 @@ const TodoSummary: React.FC<Props> = ({
           </Typography>
         </CardContent>
       </Link>
+      <CardActions className={classes.todoSummary__actions}>
+        <IconButton aria-label="delete" onClick={deleteTodo}>
+          <DeleteIcon />
+        </IconButton>
+      </CardActions>
     </Card>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import moment from "moment";
 import { NewTodoModel } from "../../models/newTodoModel/newTodoModel";
-import { NewTodoType } from "../types/types";
+import { NewTodoType, TodoType } from "../types/types";
 import { funcValidateForm } from "./helpers/funcValidateForm";
 
 /**
@@ -21,8 +21,20 @@ const getIntitialState = (): NewTodoType =>
  * @description custom hook
  * @returns {Object} form state and callback functions
  */
-const useForm = () => {
-  const [objTodo, setObjTodo] = useState<NewTodoType>(getIntitialState());
+const useForm = (objIntitialState = getIntitialState()) => {
+  let objInitialFormState: NewTodoType | TodoType = objIntitialState;
+
+  if ("id" in objIntitialState) {
+    const { id, ...objRestOfState } = objIntitialState as TodoType;
+    objInitialFormState = objRestOfState;
+  }
+
+  /**
+   * @description form state
+   */
+  const [objTodo, setObjTodo] = useState<NewTodoType | TodoType>(
+    objInitialFormState
+  );
 
   /**
    * @description callback on change input value
@@ -44,15 +56,21 @@ const useForm = () => {
    * @description reset form state
    * @returns {undefined} resets to initial values
    */
-  const resetFormState = useCallback(() => setObjTodo(getIntitialState()), []);
+  const resetFormState = useCallback(() => setObjTodo(objInitialFormState), [
+    setObjTodo,
+    objInitialFormState,
+  ]);
 
   /**
    * @description callback on submit form
+   * @param {Function} funcCallback callback function on submit
    * @param {Object} objEvent form change event object
    * @returns {undefined} sets state, resets to initial values
    */
   const handleSubmit = useCallback(
-    (objEvent: React.FormEvent) => {
+    (funcCallback: (...args: any) => void = () => {}) => (
+      objEvent: React.FormEvent
+    ) => {
       objEvent.preventDefault();
       const bFormValid = funcValidateForm(objTodo);
 
@@ -61,7 +79,7 @@ const useForm = () => {
         return;
       }
 
-      console.log("form submitted: ", objTodo);
+      funcCallback();
       resetFormState();
     },
     [objTodo, resetFormState]
