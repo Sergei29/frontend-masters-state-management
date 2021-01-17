@@ -1,5 +1,4 @@
 import { createStyles, Theme } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 
 export type ClassesType = {
   paper__root__noBoxShadow: string;
@@ -16,6 +15,7 @@ export const style = (theme: Theme) =>
     todoList: {
       display: "flex",
       justifyContent: "center",
+      flexWrap: "wrap",
     },
 
     todoList__todoItem: {
@@ -24,12 +24,7 @@ export const style = (theme: Theme) =>
     },
 
     todoList__callToAction: {
-      "& > span > svg": {
-        fontSize: "3.5rem",
-      },
-      "&:hover": {
-        color: red.A700,
-      },
-      color: red[500],
+      display: "flex",
+      justifyContent: "center",
     },
   });

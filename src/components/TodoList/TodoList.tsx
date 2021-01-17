@@ -1,15 +1,7 @@
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-ui/core";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { Card, CardContent, CardActions, Typography } from "@material-ui/core";
 import { useTodoList } from "./useTodoList";
 //components:
 import TodoSummary from "../TodoSummary";
@@ -57,7 +49,7 @@ const TodoList: React.FC<Props> = ({ classes, history }) => {
             />
           ))}
       </CardContent>
-      <CardActions>
+      <CardActions className={classes.todoList__callToAction}>
         <AddButton funcOnClick={funcAddTodo} title="click to add new TODO" />
       </CardActions>
     </Card>
