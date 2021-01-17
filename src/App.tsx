@@ -12,7 +12,6 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Navigation />
-      <hr />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/todos" component={TodoListPage} />

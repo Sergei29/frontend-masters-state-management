@@ -7,10 +7,13 @@ import {
   CardActions,
   Typography,
   Button,
+  IconButton,
 } from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { useTodoList } from "./useTodoList";
 //components:
 import TodoSummary from "../TodoSummary";
+import AddButton from "../AddButton";
 //styles:
 import { style, ClassesType } from "./style";
 
@@ -38,7 +41,7 @@ const TodoList: React.FC<Props> = ({ classes, history }) => {
   const funcAddTodo = () => history.push("/todo_new");
 
   return (
-    <Card>
+    <Card classes={{ root: classes.paper__root__noBoxShadow }}>
       <CardContent className={classes.todoList}>
         {data &&
           data.length &&
@@ -55,12 +58,7 @@ const TodoList: React.FC<Props> = ({ classes, history }) => {
           ))}
       </CardContent>
       <CardActions>
-        <Button
-          onClick={funcAddTodo}
-          className={classes.todoList__callToAction}
-        >
-          Add Todo
-        </Button>
+        <AddButton funcOnClick={funcAddTodo} title="click to add new TODO" />
       </CardActions>
     </Card>
   );

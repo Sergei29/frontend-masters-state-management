@@ -1,4 +1,5 @@
 import { createStyles, Theme } from "@material-ui/core";
+import { red } from "@material-ui/core/colors";
 
 export type ClassesType = {
   navigation: string;
@@ -10,6 +11,8 @@ export const style = (theme: Theme) =>
     navigation: {
       display: "flex",
       justifyContent: "center",
+      borderBottom: `3px solid ${red[500]}`,
+      marginBottom: theme.spacing(2),
     },
 
     navigation__link: {

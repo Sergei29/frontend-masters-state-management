@@ -5,12 +5,12 @@ import TodoList from "../../components/TodoList";
 
 const TodoListPage = () => {
   return (
-    <div>
+    <>
       <Typography variant="h2" align="center">
-        TodoList Page
+        My TODO list
       </Typography>
       <TodoList />
-    </div>
+    </>
   );
 };
 

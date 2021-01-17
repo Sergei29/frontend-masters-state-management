@@ -34,7 +34,7 @@ const TodoSummary: React.FC<Props> = ({
   const { deleteTodo } = useDeleteTodo(strId);
 
   return (
-    <Card className={classes.todoSummary}>
+    <Card className={classes.todoSummary} square>
       <Link to={`/todos/${strId}`}>
         <CardContent>
           <Typography variant="h5">{strTitle}</Typography>

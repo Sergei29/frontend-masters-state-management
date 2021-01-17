@@ -13,6 +13,7 @@ export const style = (theme: Theme) =>
         color: "#333",
         textDecoration: "none",
       },
+      borderRadius: "none",
       padding: theme.spacing(0.5),
       margin: theme.spacing(0.5),
       backgroundColor: green[100],
