@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import CounterClassComponent from "./components/CounterClassComponent";
 import CounterFuncComponent from "./components/CounterFuncComponent";
 import GrudgeList from "./components/GrudgeList";
+import PaginationPage from "./pages/PaginationPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           path="/counter-functional"
           render={() => <CounterFuncComponent max={15} step={5} />}
         />
+        <Route path="/pagination" component={PaginationPage} />
       </Switch>
     </div>
   );

@@ -19,6 +19,9 @@ const Navigation: React.FC<Props> = ({ classes }) => {
       <NavLink to="/counter-class" className={classes.navigation__link}>
         Class Counter
       </NavLink>
+      <NavLink to="/pagination" className={classes.navigation__link}>
+        Pagination
+      </NavLink>
     </nav>
   );
 };
