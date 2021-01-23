@@ -41,10 +41,10 @@ const generatePages = (
     arrResult = fillArrayOfIntegers(intStartPage, intEndPage);
   } else {
     // if total pages more than max limit- then calculate based on current page:
-    const intNeighboursLeft = Math.ceil(intMaxPages / 2);
-    const intNeighboursRight = Math.floor(intMaxPages / 2);
+    const intNeighboursLeft = Math.floor(intMaxPages / 2);
+    const intNeighboursRight = Math.ceil(intMaxPages / 2);
 
-    if (intCurrentPage < intNeighboursLeft) {
+    if (intCurrentPage <= intNeighboursLeft) {
       // current page is near the start of array:
 
       intStartPage = 1;
@@ -52,10 +52,10 @@ const generatePages = (
       const arrPages = fillArrayOfIntegers(intStartPage, intEndPage);
 
       arrResult = [...arrPages, RIGHT_SPILL, intTotalPages];
-    } else if (intCurrentPage + intMaxPages > intTotalPages) {
+    } else if (intCurrentPage + intNeighboursRight >= intTotalPages) {
       // current page is near the finish of the array:
 
-      intStartPage = intTotalPages - intMaxPages;
+      intStartPage = intTotalPages - intMaxPages + 1;
       intEndPage = intTotalPages;
 
       const arrPages = fillArrayOfIntegers(intStartPage, intEndPage);
@@ -64,7 +64,7 @@ const generatePages = (
     } else {
       // current page is somewhere in the middle of the array:
 
-      intStartPage = intCurrentPage - intNeighboursLeft;
+      intStartPage = intCurrentPage - intNeighboursLeft + 1;
       intEndPage = intCurrentPage + intNeighboursRight;
 
       const arrPages = fillArrayOfIntegers(intStartPage, intEndPage);

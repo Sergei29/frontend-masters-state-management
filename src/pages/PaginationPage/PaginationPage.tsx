@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Typography } from "@material-ui/core";
 import Pagination from "../../components/Pagination";
 
 const PaginationPage: React.FC = (): JSX.Element => {
-  const funcOnPageChange = (intPage: number) => {
+  const funcOnPageChange = useCallback((intPage: number) => {
     console.log("Page: ", intPage);
-  };
+  }, []);
 
   return (
     <div>
@@ -13,6 +13,7 @@ const PaginationPage: React.FC = (): JSX.Element => {
       <Pagination
         intItemsPerPage={5}
         intTotalItems={58}
+        intMaxPages={5}
         funcCallback={funcOnPageChange}
       />
     </div>
