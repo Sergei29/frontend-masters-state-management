@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 //components:
 import Form from "./components/Form";
 import Grudge from "./components/Grudge";
+import DataListGrudges from "./components/DataListGrudges";
 //styles:
 import { style, ClassesType } from "./style";
 
@@ -32,6 +33,7 @@ const GrudgeList: React.FC<Props> = ({ classes }) => {
         Grudges !
       </Typography>
       <Form submitCallback={submitGrudge} />
+      <DataListGrudges />
       <div className={classes.grudgeLIst__list}>
         {arrGrudges &&
           arrGrudges.length > 0 &&
