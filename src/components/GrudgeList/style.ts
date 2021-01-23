@@ -9,6 +9,7 @@ export const style = (theme: Theme) =>
   createStyles({
     grudgeLIst__list: {
       display: "flex",
+      flexWrap: "wrap",
     },
     grudgeLIst__list__heading: {
       color: green.A700,

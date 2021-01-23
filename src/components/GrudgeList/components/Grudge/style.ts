@@ -10,11 +10,13 @@ export const style = (theme: Theme) =>
   createStyles({
     grudgeLIst__item_forgiven: {
       width: "30%",
+      minWidth: 200,
       backgroundColor: green[300],
       margin: theme.spacing(1),
     },
     grudgeLIst__item_notForgiven: {
       width: "30%",
+      minWidth: 200,
       backgroundColor: orange[300],
       margin: theme.spacing(1),
     },
