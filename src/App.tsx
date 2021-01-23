@@ -1,28 +1,33 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { Container } from "@material-ui/core";
 //components:
 import Navigation from "./components/Navigation";
 import CounterClassComponent from "./components/CounterClassComponent";
 import CounterFuncComponent from "./components/CounterFuncComponent";
 import GrudgeList from "./components/GrudgeList";
 import PaginationPage from "./pages/PaginationPage";
+import NewHtmlFeaturesPage from "./pages/NewHtmlFeaturesPage";
 
 function App() {
   return (
     <div className="App">
       <Navigation />
-      <Switch>
-        <Route path="/" exact component={GrudgeList} />
-        <Route
-          path="/counter-class"
-          render={() => <CounterClassComponent max={15} step={5} />}
-        />
-        <Route
-          path="/counter-functional"
-          render={() => <CounterFuncComponent max={15} step={5} />}
-        />
-        <Route path="/pagination" component={PaginationPage} />
-      </Switch>
+      <Container>
+        <Switch>
+          <Route path="/" exact component={GrudgeList} />
+          <Route
+            path="/counter-class"
+            render={() => <CounterClassComponent max={15} step={5} />}
+          />
+          <Route
+            path="/counter-functional"
+            render={() => <CounterFuncComponent max={15} step={5} />}
+          />
+          <Route path="/pagination" component={PaginationPage} />
+          <Route path="/new-html-features" component={NewHtmlFeaturesPage} />
+        </Switch>
+      </Container>
     </div>
   );
 }

@@ -11,6 +11,7 @@ export const style = (theme: Theme) =>
     navigation: {
       display: "flex",
       justifyContent: "center",
+      marginBottom: theme.spacing(4),
     },
     navigation__link: {
       "&.active": { color: red[500] },
