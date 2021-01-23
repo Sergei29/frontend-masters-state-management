@@ -57,8 +57,13 @@ const Grudge: React.FC<Props> = ({
 
         <div className={classes.grudgeLIst__item__switch}>
           <Typography>{forgiven ? "forgiven: " : "not forgiven: "}</Typography>
-
-          <Switch checked={forgiven} name="forgiven" onChange={switchForgive} />
+          <Tooltip title={forgiven ? "Unforgive" : "Forgive"}>
+            <Switch
+              checked={forgiven}
+              name="forgiven"
+              onChange={switchForgive}
+            />
+          </Tooltip>
         </div>
         <Tooltip title="Delete the grudge">
           <IconButton onClick={deleteHandler}>
