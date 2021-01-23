@@ -9,7 +9,8 @@ export type ClassesType = {
 export const style = (theme: Theme) =>
   createStyles({
     form: {
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(4),
+      marginBottom: theme.spacing(4),
       display: "flex",
       flexDirection: "row",
       justifyContent: "center",

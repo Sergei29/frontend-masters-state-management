@@ -22,6 +22,17 @@ type Props = {
   onDelete: (id: string) => void;
 };
 
+/**
+ * @description func component: single item list
+ * @param {Object} {classes MUI classes
+ * @param {String} person name
+ * @param {String} reason reason why
+ * @param {String} id unique id
+ * @param {Boolean} forgiven is forgiven or not
+ * @param {Function} onForgive callback on forgive
+ * @param {Function} onDelete callback on delete }
+ * @returns {JSX} markup
+ */
 const Grudge: React.FC<Props> = ({
   classes,
   person,
@@ -34,8 +45,12 @@ const Grudge: React.FC<Props> = ({
   const switchForgive = () => onForgive(id);
   const deleteHandler = () => onDelete(id);
 
+  const strItemClass = forgiven
+    ? classes.grudgeLIst__item_forgiven
+    : classes.grudgeLIst__item_notForgiven;
+
   return (
-    <Card className={classes.grudgeLIst__item}>
+    <Card className={strItemClass}>
       <CardContent>
         <Typography>{person}</Typography>
         <Typography>{reason}</Typography>

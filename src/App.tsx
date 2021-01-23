@@ -5,9 +5,9 @@ import { Container } from "@material-ui/core";
 import Navigation from "./components/Navigation";
 import CounterClassComponent from "./components/CounterClassComponent";
 import CounterFuncComponent from "./components/CounterFuncComponent";
-import GrudgeList from "./components/GrudgeList";
 import PaginationPage from "./pages/PaginationPage";
 import NewHtmlFeaturesPage from "./pages/NewHtmlFeaturesPage";
+import GrudgeListPage from "./pages/GrudgeListPage";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <Navigation />
       <Container>
         <Switch>
-          <Route path="/" exact component={GrudgeList} />
+          <Route path="/" exact component={GrudgeListPage} />
           <Route
             path="/counter-class"
             render={() => <CounterClassComponent max={15} step={5} />}

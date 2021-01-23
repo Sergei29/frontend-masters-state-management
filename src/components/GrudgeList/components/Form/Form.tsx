@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, FormControl } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { GrudgeType } from "../../types/types";
 //styles:
 import { style, ClassesType } from "./style";
 type ChangeEventType = React.ChangeEvent<
@@ -9,10 +10,18 @@ type ChangeEventType = React.ChangeEvent<
 
 type Props = {
   classes: ClassesType;
-  submitCallback: (objGrudge: Record<string, any>) => void;
+  submitCallback: (objGrudge: GrudgeType) => void;
 };
+
+const OBJ_INITIAL_STATE = {
+  person: "",
+  reason: "",
+  id: "",
+  forgiven: false,
+};
+
 const Form: React.FC<Props> = ({ classes, submitCallback }) => {
-  const [objState, setObjState] = useState<Record<string, any>>({});
+  const [objState, setObjState] = useState<GrudgeType>(OBJ_INITIAL_STATE);
 
   const handleChange = (objEvt: ChangeEventType) => {
     const { name, value } = objEvt.target;
@@ -34,7 +43,7 @@ const Form: React.FC<Props> = ({ classes, submitCallback }) => {
     )
       return;
     submitCallback(objState);
-    setObjState({});
+    setObjState(OBJ_INITIAL_STATE);
   };
 
   return (

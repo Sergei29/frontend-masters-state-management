@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useContext } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { GrudgeContext } from "./ContextProvider/ContextProvider";
+import Typography from "@material-ui/core/Typography";
 //components:
 import Form from "./components/Form";
 import Grudge from "./components/Grudge";
@@ -11,37 +12,30 @@ type Props = {
   classes: ClassesType;
 };
 
+/**
+ * @description list component
+ * @param {Object} {classes MUI classes}
+ * @returns {JSX} markup, list of grudges :)
+ */
 const GrudgeList: React.FC<Props> = ({ classes }) => {
-  const [arrList, setArrList] = useState<Record<string, any>[]>([]);
-
-  const submitGrudge = (objGrudge: Record<string, any>) => {
-    const objNewGrudge = { ...objGrudge, id: uuidv4(), forgiven: false };
-    setArrList((prevArrList) => [objNewGrudge, ...prevArrList]);
-  };
-
-  const toggleForgive = (id: string) =>
-    setArrList((prevArrList) =>
-      prevArrList.map((objGrudge) => {
-        if (objGrudge.id === id) {
-          return {
-            ...objGrudge,
-            forgiven: !objGrudge.forgiven,
-          };
-        }
-        return objGrudge;
-      })
-    );
-  const deleteGrudge = (id: string) =>
-    setArrList((prevArrList) =>
-      prevArrList.filter((objGrudge) => objGrudge.id !== id)
-    );
+  const { arrGrudges, submitGrudge, toggleForgive, deleteGrudge } = useContext(
+    GrudgeContext
+  );
 
   return (
     <div>
+      <Typography
+        variant="h3"
+        align="center"
+        className={classes.grudgeLIst__list__heading}
+      >
+        Grudges !
+      </Typography>
       <Form submitCallback={submitGrudge} />
       <div className={classes.grudgeLIst__list}>
-        {arrList.length > 0 &&
-          arrList.map((objGrudge) => (
+        {arrGrudges &&
+          arrGrudges.length > 0 &&
+          arrGrudges.map((objGrudge) => (
             <Grudge
               key={objGrudge.id}
               person={objGrudge.person}
