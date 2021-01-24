@@ -36,6 +36,7 @@ const ContextProvider: React.FC<Props> = ({ children }): JSX.Element => {
     reducer,
     getStateFromLocalStorage("state") || INITIAL_STATE
   );
+  const { grudges: arrGrudges } = state;
 
   /**
    * @description on change - saves state to local storage
@@ -44,22 +45,23 @@ const ContextProvider: React.FC<Props> = ({ children }): JSX.Element => {
     localStorage.setItem("state", JSON.stringify(state));
   }, [state]);
 
-  const { grudges: arrGrudges } = state;
-
   /**
    * @description submit form callback
    * @param {Object} objGrudge form data - new grudge
    * @returns {undefined} fires an action
    */
-  const submitGrudge = useCallback((objGrudge: Partial<GrudgeType>) => {
-    const objNewGrudge = {
-      ...objGrudge,
-      id: uuidv4(),
-      forgiven: false,
-    } as GrudgeType;
+  const submitGrudge = useCallback(
+    (objGrudge: Partial<GrudgeType>) => {
+      const objNewGrudge = {
+        ...objGrudge,
+        id: uuidv4(),
+        forgiven: false,
+      } as GrudgeType;
 
-    dispatch(actionAddNewGrudge(objNewGrudge));
-  }, []);
+      dispatch(actionAddNewGrudge(objNewGrudge));
+    },
+    [dispatch]
+  );
 
   /**
    * @description on switch click callback
@@ -68,7 +70,7 @@ const ContextProvider: React.FC<Props> = ({ children }): JSX.Element => {
    */
   const toggleForgive = useCallback(
     (strId: string) => dispatch(actionToggleForgive(strId)),
-    []
+    [dispatch]
   );
 
   /**
@@ -78,7 +80,7 @@ const ContextProvider: React.FC<Props> = ({ children }): JSX.Element => {
    */
   const deleteGrudge = useCallback(
     (strId: string) => dispatch(actionDeleteGrudge(strId)),
-    []
+    [dispatch]
   );
 
   return (

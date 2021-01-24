@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import {
   Card,
   CardContent,
@@ -45,6 +45,7 @@ const Grudge: React.FC<Props> = ({
   const strItemClass = forgiven
     ? classes.grudgeLIst__item_forgiven
     : classes.grudgeLIst__item_notForgiven;
+  console.log(id);
 
   return (
     <Card className={strItemClass}>
@@ -72,4 +73,4 @@ const Grudge: React.FC<Props> = ({
   );
 };
 
-export default withStyles(style)(Grudge);
+export default withStyles(style)(memo(Grudge));

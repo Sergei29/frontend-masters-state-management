@@ -25,7 +25,7 @@ const OBJ_INITIAL_STATE = {
  * @param {Object} {classes MUI classes}
  * @returns {JSX} markup
  */
-const Form: React.FC<Props> = ({ classes }): JSX.Element => {
+const NewGrudgeForm: React.FC<Props> = ({ classes }): JSX.Element => {
   const [objState, setObjState] = useState<GrudgeType>(OBJ_INITIAL_STATE);
   const { submitGrudge } = useContext(GrudgeContext);
 
@@ -95,4 +95,4 @@ const Form: React.FC<Props> = ({ classes }): JSX.Element => {
   );
 };
 
-export default withStyles(style)(Form);
+export default withStyles(style)(NewGrudgeForm);

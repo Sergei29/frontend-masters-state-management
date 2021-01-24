@@ -1,11 +1,10 @@
-import React, { useContext, memo } from "react";
+import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { GrudgeContext } from "./ContextProvider/ContextProvider";
 import Typography from "@material-ui/core/Typography";
 //components:
-import Form from "./components/Form";
-import Grudge from "./components/Grudge";
+import NewGrudgeForm from "./components/NewGrudgeForm";
 import DataListGrudges from "./components/DataListGrudges";
+import Grudges from "./components/Grudges";
 //styles:
 import { style, ClassesType } from "./style";
 
@@ -14,13 +13,11 @@ type Props = {
 };
 
 /**
- * @description list component
+ * @description grudge list app
  * @param {Object} {classes MUI classes}
- * @returns {JSX} markup, list of grudges :)
+ * @returns {JSX} markup, grudges :)
  */
 const GrudgeList: React.FC<Props> = ({ classes }): JSX.Element => {
-  const { arrGrudges } = useContext(GrudgeContext);
-
   return (
     <div>
       <Typography
@@ -30,17 +27,11 @@ const GrudgeList: React.FC<Props> = ({ classes }): JSX.Element => {
       >
         Grudges !
       </Typography>
-      <Form />
+      <NewGrudgeForm />
       <DataListGrudges />
-      <div className={classes.grudgeLIst__list}>
-        {arrGrudges &&
-          arrGrudges.length > 0 &&
-          arrGrudges.map((objGrudge) => (
-            <Grudge key={objGrudge.id} {...objGrudge} />
-          ))}
-      </div>
+      <Grudges />
     </div>
   );
 };
 
-export default memo(withStyles(style)(GrudgeList));
+export default withStyles(style)(GrudgeList);

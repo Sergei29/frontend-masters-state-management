@@ -36,6 +36,7 @@ const DataListGrudges: React.FC<Props> = ({ classes }): JSX.Element => {
           inputProps={{ list: "grudges" }}
           onChange={handleChange}
           value={strSelectedGrudge}
+          variant="outlined"
         />
         <datalist id="grudges">
           {arrGrudges.map(({ reason, id }) => (
