@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextField, Button, FormControl } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { GrudgeContext } from "../../ContextProvider/ContextProvider";
 import { GrudgeType } from "../../types/types";
 //styles:
 import { style, ClassesType } from "./style";
@@ -10,7 +11,6 @@ type ChangeEventType = React.ChangeEvent<
 
 type Props = {
   classes: ClassesType;
-  submitCallback: (objGrudge: GrudgeType) => void;
 };
 
 const OBJ_INITIAL_STATE = {
@@ -20,9 +20,20 @@ const OBJ_INITIAL_STATE = {
   forgiven: false,
 };
 
-const Form: React.FC<Props> = ({ classes, submitCallback }) => {
+/**
+ * @description form to add a new grudge
+ * @param {Object} {classes MUI classes}
+ * @returns {JSX} markup
+ */
+const Form: React.FC<Props> = ({ classes }): JSX.Element => {
   const [objState, setObjState] = useState<GrudgeType>(OBJ_INITIAL_STATE);
+  const { submitGrudge } = useContext(GrudgeContext);
 
+  /**
+   * @description input change handler
+   * @param {Object} objEvt change event object
+   * @returns {undefined} sets local state
+   */
   const handleChange = (objEvt: ChangeEventType) => {
     const { name, value } = objEvt.target;
     setObjState((prevState) => ({
@@ -31,10 +42,13 @@ const Form: React.FC<Props> = ({ classes, submitCallback }) => {
     }));
   };
 
+  /**
+   * @description form submit handler
+   * @param {Object} objEvt form event object
+   * @returns {undefined} validates, fires an action and sets local state
+   */
   const handleSubmit = (objEvt: React.FormEvent) => {
     objEvt.preventDefault();
-    console.log("submit");
-
     if (
       !objState.person ||
       !objState.reason ||
@@ -42,7 +56,7 @@ const Form: React.FC<Props> = ({ classes, submitCallback }) => {
       objState.reason.length === 0
     )
       return;
-    submitCallback(objState);
+    submitGrudge(objState);
     setObjState(OBJ_INITIAL_STATE);
   };
 
