@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
-import useFetch from "./useFetch";
+import useFetch from "../../hooks/useFetch";
 //styles:
 import { style, ClassesType } from "./style";
 
