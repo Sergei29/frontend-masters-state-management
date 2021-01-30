@@ -1,63 +1,17 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
+import useFetch from "./useFetch";
 //styles:
 import { style, ClassesType } from "./style";
-
-const SW_API = "https://www.swapi.tech/api/";
-
-type CharacterType = {
-  uid: string;
-  name: string;
-  url: string;
-};
 
 type Props = {
   classes: ClassesType;
 };
 
 const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
-  const [arrCharachters, setArrCharachters] = useState<CharacterType[]>([]);
-  const [bLoading, setBLoading] = useState<boolean>(false);
-  const [strError, setStrError] = useState<string>("");
-
-  /**
-   * @description fetch SW Characters on mount.
-   * @returns {undefined} sets local state wit hfetch results
-   */
-  useEffect(() => {
-    let bWillUnmount = false;
-
-    const funchGetchCharacters = async () => {
-      setBLoading(true);
-      try {
-        const { data } = await axios.get(`${SW_API}/people/`);
-        if (!bWillUnmount) {
-          setBLoading(false);
-          setStrError("");
-          setArrCharachters(() => data.results);
-        }
-      } catch (error) {
-        const strMessage = error.message
-          ? error.message
-          : "Failed to fetch Characters.";
-
-        if (!bWillUnmount) {
-          setBLoading(false);
-          setStrError(strMessage);
-        }
-      }
-    };
-
-    funchGetchCharacters();
-
-    //cleanup:
-    return () => {
-      bWillUnmount = true;
-    };
-  }, []);
+  const { arrCharachters, bLoading, strError } = useFetch();
 
   const renderList = () =>
     arrCharachters.length > 0 ? (
