@@ -1,39 +1,34 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const SW_API = "https://www.swapi.tech/api/";
-
-type CharacterType = {
-  uid: string;
-  name: string;
-  url: string;
-};
-
-const useFetch = () => {
-  const [arrCharachters, setArrCharachters] = useState<CharacterType[]>([]);
+/**
+ * @description custom hook to fetch data
+ * @param {String} strUrl api endpoint
+ * @returns {Object} fetching status: data,loading, error
+ */
+const useFetch = (strUrl: string) => {
+  const [objData, setData] = useState<Record<string, any>>({});
   const [bLoading, setBLoading] = useState<boolean>(false);
   const [strError, setStrError] = useState<string>("");
 
   /**
-   * @description fetch SW Characters on mount.
-   * @returns {undefined} sets local state wit hfetch results
+   * @description fetch data on mount.
+   * @returns {undefined} sets local state with fetch results
    */
   useEffect(() => {
     let bWillUnmount = false;
 
-    const funchGetchCharacters = async () => {
+    const funchFetchData = async () => {
       setBLoading(true);
       try {
-        const { data } = await axios.get(`${SW_API}/people/`);
+        const { data } = await axios.get(strUrl);
         if (!bWillUnmount) {
           setBLoading(false);
           setStrError("");
-          setArrCharachters(() => data.results);
+          setData(() => data);
         }
       } catch (error) {
-        const strMessage = error.message
-          ? error.message
-          : "Failed to fetch Characters.";
+        const strMessage = error.message ? error.message : "Failed to fetch.";
 
         if (!bWillUnmount) {
           setBLoading(false);
@@ -42,15 +37,15 @@ const useFetch = () => {
       }
     };
 
-    funchGetchCharacters();
+    funchFetchData();
 
     //cleanup:
     return () => {
       bWillUnmount = true;
     };
-  }, []);
+  }, [strUrl]);
 
-  return { arrCharachters, bLoading, strError };
+  return { objData, bLoading, strError };
 };
 
 export default useFetch;

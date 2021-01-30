@@ -6,12 +6,21 @@ import useFetch from "./useFetch";
 //styles:
 import { style, ClassesType } from "./style";
 
+const SW_API = "https://www.swapi.tech/api/";
+
+type CharacterType = {
+  uid: string;
+  name: string;
+  url: string;
+};
+
 type Props = {
   classes: ClassesType;
 };
 
 const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
-  const { arrCharachters, bLoading, strError } = useFetch();
+  const { objData, bLoading, strError } = useFetch(`${SW_API}/people/`);
+  const arrCharachters: CharacterType[] = objData.results || [];
 
   const renderList = () =>
     arrCharachters.length > 0 ? (
