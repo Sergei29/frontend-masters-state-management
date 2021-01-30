@@ -18,10 +18,20 @@ type Props = {
   classes: ClassesType;
 };
 
+/**
+ * @description func component, star wars charcters fetched from api
+ * @param {Object} {classes MUI classes}
+ * @returns {JSX} markup, characters list
+ */
 const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
   const { objData, bLoading, strError } = useFetch(`${SW_API}/people/`);
+
   const arrCharachters: CharacterType[] = objData.results || [];
 
+  /**
+   * @description fetched results renderer
+   * @returns {JSX} markup
+   */
   const renderList = () =>
     arrCharachters.length > 0 ? (
       arrCharachters.map(({ uid, name }) => (
@@ -37,10 +47,18 @@ const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
       <Typography variant="subtitle1">No characters</Typography>
     );
 
+  /**
+   * @description loader renderer
+   * @returns {JSX} markup
+   */
   const renderLoader = () => (
     <Typography variant="subtitle1">Loading...</Typography>
   );
 
+  /**
+   * @description fetch error renderer
+   * @returns {JSX} markup
+   */
   const renderError = () => (
     <Typography variant="subtitle1">{strError}</Typography>
   );
