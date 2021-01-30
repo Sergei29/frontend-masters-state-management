@@ -45,7 +45,6 @@ const Grudge: React.FC<Props> = ({
   const strItemClass = forgiven
     ? classes.grudgeLIst__item_forgiven
     : classes.grudgeLIst__item_notForgiven;
-  console.log(id);
 
   return (
     <Card className={strItemClass}>

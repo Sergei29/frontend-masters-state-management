@@ -8,6 +8,7 @@ import CounterFuncComponent from "./components/CounterFuncComponent";
 import PaginationPage from "./pages/PaginationPage";
 import NewHtmlFeaturesPage from "./pages/NewHtmlFeaturesPage";
 import GrudgeListPage from "./pages/GrudgeListPage";
+import StarWarsPage from "./pages/StarWarsPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           />
           <Route path="/pagination" component={PaginationPage} />
           <Route path="/new-html-features" component={NewHtmlFeaturesPage} />
+          <Route path="/star-wars" component={StarWarsPage} />
         </Switch>
       </Container>
     </div>

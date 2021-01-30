@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
+import navLinks from "./navLinks";
 //styles:
 import { style, ClassesType } from "./style";
 
@@ -10,21 +11,16 @@ type Props = {
 const Navigation: React.FC<Props> = ({ classes }) => {
   return (
     <nav className={classes.navigation}>
-      <NavLink to="/" exact className={classes.navigation__link}>
-        GrudgeList Reducer
-      </NavLink>
-      <NavLink to="/counter-functional" className={classes.navigation__link}>
-        Functional Counter
-      </NavLink>
-      <NavLink to="/counter-class" className={classes.navigation__link}>
-        Class Counter
-      </NavLink>
-      <NavLink to="/pagination" className={classes.navigation__link}>
-        Pagination
-      </NavLink>
-      <NavLink to="/new-html-features" className={classes.navigation__link}>
-        New Html features
-      </NavLink>
+      {navLinks.map(({ id, name, path, exact }) => (
+        <NavLink
+          key={id}
+          to={path}
+          exact={exact}
+          className={classes.navigation__link}
+        >
+          {name}
+        </NavLink>
+      ))}
     </nav>
   );
 };
