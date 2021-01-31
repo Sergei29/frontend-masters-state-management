@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Container } from "@material-ui/core";
 //components:
-import Navigation from "./components/Navigation";
+import NavigationAppBar from "./components/NavigationAppBar";
 import CounterClassComponent from "./components/CounterClassComponent";
 import CounterFuncComponent from "./components/CounterFuncComponent";
 import PaginationPage from "./pages/PaginationPage";
@@ -13,7 +13,7 @@ import StarWarsPage from "./pages/StarWarsPage";
 function App() {
   return (
     <div className="App">
-      <Navigation />
+      <NavigationAppBar />
       <Container>
         <Switch>
           <Route path="/" exact component={GrudgeListPage} />
