@@ -3,7 +3,6 @@ import {
   Actions,
   ActionType,
   DispatchFnType,
-  ActionAsyncType,
   CharacterDetailsType,
 } from "./types";
 
@@ -52,18 +51,10 @@ export const actionFetchError = (strError: string): ActionType => ({
 });
 
 /**
- * @description action dispatcher function
- * @returns {Object} action event
+ * @description action creator function's generator
+ * @returns {Function}  action creator function with thunk
  */
-
-/**
- * @description action dispatcher function
- * @param {Function} dispatch dispatch event function
- * @returns {Promise | undefined} dispatching actions at various stages
- */
-export const actionFetchCharacters: ActionAsyncType = async (
-  dispatch: DispatchFnType
-) => {
+export const actionFetchCharacters = () => async (dispatch: DispatchFnType) => {
   dispatch(actionFetchStart());
   try {
     const { data } = await axios.get(`${SW_API}/people`);
@@ -74,9 +65,13 @@ export const actionFetchCharacters: ActionAsyncType = async (
   }
 };
 
-export const actionFetchById: ActionAsyncType = async (
-  dispatch: DispatchFnType,
-  strId: string
+/**
+ * @description action creator function's generator
+ * @param {String} strId item ID
+ * @returns {Function}  action creator function with thunk
+ */
+export const actionFetchById = (strId: string) => async (
+  dispatch: DispatchFnType
 ) => {
   dispatch(actionFetchStart());
   try {

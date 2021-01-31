@@ -1,9 +1,10 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import { RouteComponentProps } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { actionFetchById } from "../../actions";
 import { reducer, INIT_STATE } from "../../reducer";
+import useThunkReducer from "../../../../hooks/useThunkReducer";
 //styles:
 import { style, ClassesType } from "./style";
 
@@ -14,14 +15,14 @@ type Props = {
 } & RouteComponentProps<ParamsType>;
 
 const CharacterDetails = ({ classes, match }: Props): JSX.Element => {
-  const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  const { state, dispatch } = useThunkReducer(reducer, INIT_STATE);
 
   const { bLoading, strError, objSelectedHero } = state;
   const { id } = match.params;
 
   useEffect(() => {
-    actionFetchById(dispatch, id);
-  }, [id]);
+    dispatch(actionFetchById(id));
+  }, [id, dispatch]);
 
   if (bLoading) {
     return <Typography align="center">Loading...</Typography>;

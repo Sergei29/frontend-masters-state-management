@@ -1,9 +1,11 @@
-import React, { useReducer, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Route } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { reducer, INIT_STATE } from "./reducer";
 import { actionFetchCharacters } from "./actions";
+import useThunkReducer from "../../hooks/useThunkReducer";
+import { StateType } from "./types";
 //components:
 import CharacterDetails from "./components/CharacterDetails";
 //styles:
@@ -20,9 +22,9 @@ type Props = {
  */
 const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
   const [strSelectedId, setSelectedId] = useState("");
-  const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  const { state, dispatch } = useThunkReducer(reducer, INIT_STATE);
 
-  const { arrResults, bLoading, strError } = state;
+  const { arrResults, bLoading, strError } = state as StateType;
 
   /**
    * @description item click handler
@@ -72,7 +74,7 @@ const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
   );
 
   useEffect(() => {
-    actionFetchCharacters(dispatch);
+    dispatch(actionFetchCharacters());
   }, [dispatch]);
 
   return (

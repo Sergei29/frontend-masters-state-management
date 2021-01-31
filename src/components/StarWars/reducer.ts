@@ -15,24 +15,24 @@ export const INIT_STATE: StateType = {
 
 /**
  * @description reducer function
- * @param {Object} objlState state
+ * @param {Object} objState state
  * @param {Object} objAction action
  * @returns {Object} new state
  */
 export const reducer = (
-  objlState: StateType,
+  objState: StateType,
   objAction: ActionType
 ): StateType => {
   switch (objAction.type) {
     case Actions.FETCH_START:
       return {
-        ...objlState,
+        ...objState,
         bLoading: true,
       };
 
     case Actions.FETCH_CHARACTERS_SUCCESS:
       return {
-        ...objlState,
+        ...objState,
         bLoading: false,
         strError: "",
         arrResults: objAction.payload as CharacterType[],
@@ -40,7 +40,7 @@ export const reducer = (
 
     case Actions.FETCH_BY_ID_SUCCESS:
       return {
-        ...objlState,
+        ...objState,
         bLoading: false,
         strError: "",
         objSelectedHero: objAction.payload as CharacterDetailsType,
@@ -48,12 +48,12 @@ export const reducer = (
 
     case Actions.FETCH_ERROR:
       return {
-        ...objlState,
+        ...objState,
         bLoading: false,
         strError: objAction.payload as string,
       };
 
     default:
-      return objlState;
+      return objState;
   }
 };
