@@ -1,5 +1,4 @@
 import { createStyles, Theme } from "@material-ui/core";
-import { blue } from "@material-ui/core/colors";
 
 export type ClassesType = {
   starWars: string;
@@ -12,7 +11,6 @@ export type ClassesType = {
 
 export const style = (theme: Theme) => {
   const objSelectCss = {
-    backgroundColor: blue[100],
     border: `1px solid ${theme.palette.primary.main}`,
     borderRadius: 4,
   };
@@ -38,16 +36,18 @@ export const style = (theme: Theme) => {
       padding: theme.spacing(1),
       border: "1px solid transparent",
       "&:hover": {
-        ...objSelectCss,
+        textDecoration: "underline",
       },
       transition: `all 300ms ease-in`,
     },
 
     charactersItemSelected: {
-      textDecoration: "none",
-      color: theme.palette.primary.main,
-      padding: theme.spacing(1),
       ...objSelectCss,
+      textDecoration: "none",
+      backgroundColor: theme.palette.primary.main,
+      color: "#fff",
+      padding: theme.spacing(1),
+      transition: `all 300ms ease-in`,
     },
 
     currentDetails: {
