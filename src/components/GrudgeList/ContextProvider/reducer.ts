@@ -1,4 +1,5 @@
-import { GrudgeType, ActionName, ActionType, StateType } from "../types/types";
+import { GrudgeType, ActionName, ReducerType } from "../types/types";
+import { INITIAL_STATE } from "./initialState";
 
 const {
   ADD_GRUDGE,
@@ -6,15 +7,8 @@ const {
   TOGGLE_FORGIVE_GRUDGE,
   UNDO_THE_LAST,
   REDO_THE_LAST,
+  RESET_STATE,
 } = ActionName;
-
-const INITIAL_STATE: StateType = {
-  past: [],
-  present: { grudges: [] },
-  future: [],
-};
-
-type ReducerType = (objState: StateType, objAction: ActionType) => StateType;
 
 const reducer: ReducerType = (objState = INITIAL_STATE, objAction) => {
   switch (objAction.type) {
@@ -80,6 +74,8 @@ const reducer: ReducerType = (objState = INITIAL_STATE, objAction) => {
         present: objMostRecentFuture,
         future: arrRestOfFuture,
       };
+    case RESET_STATE:
+      return { ...INITIAL_STATE };
     default:
       return objState;
   }

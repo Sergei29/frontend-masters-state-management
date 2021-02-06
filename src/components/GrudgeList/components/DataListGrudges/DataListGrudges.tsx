@@ -1,15 +1,11 @@
 import React, { useContext, useState } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {
-  TextField,
-  Card,
-  CardContent,
-  IconButton,
-  Tooltip,
-} from "@material-ui/core";
-import UndoIcon from "@material-ui/icons/Undo";
-import RedoIcon from "@material-ui/icons/Redo";
+import { TextField, Card, CardContent } from "@material-ui/core";
 import { GrudgeContext } from "../../ContextProvider/ContextProvider";
+//components:
+import UndoButton from "./components/UndoButton/UndoButton";
+import RedoButton from "./components/RedoButton/RedoButton";
+import ResetStateButton from "./components/ResetStateButton/ResetStateButton";
 //styles:
 import { style, ClassesType } from "./style";
 
@@ -19,17 +15,21 @@ type Props = {
 
 /**
  * @description datalist component
- * @param {Object} {classes MUI classes}
+ * @param {Object} props component props
  * @returns {JSX} markup
  */
 const DataListGrudges: React.FC<Props> = ({ classes }): JSX.Element => {
   const [strSelectedGrudge, setStrSelectedGrudge] = useState<string>("");
 
-  const { objState, undoTheLast, redoTheLast } = useContext(GrudgeContext);
+  const { objState, undoTheLast, redoTheLast, resetState } = useContext(
+    GrudgeContext
+  );
 
   const { grudges: arrGrudges } = objState.present;
   const bDisableUndo = objState.past.length === 0;
   const bDisableRedo = objState.future.length === 0;
+  const bDisableReset =
+    bDisableUndo && bDisableRedo && objState.present.grudges.length === 0;
 
   /**
    * @description input change handler
@@ -57,17 +57,9 @@ const DataListGrudges: React.FC<Props> = ({ classes }): JSX.Element => {
           ))}
         </datalist>
       </CardContent>
-      <IconButton onClick={undoTheLast} disabled={bDisableUndo}>
-        <Tooltip title="Undo the last">
-          <UndoIcon color="primary" />
-        </Tooltip>
-      </IconButton>
-
-      <IconButton onClick={redoTheLast} disabled={bDisableRedo}>
-        <Tooltip title="Redo the last">
-          <RedoIcon color="secondary" />
-        </Tooltip>
-      </IconButton>
+      <UndoButton handleClick={undoTheLast} bDisabled={bDisableUndo} />
+      <RedoButton handleClick={redoTheLast} bDisabled={bDisableRedo} />
+      <ResetStateButton handleClick={resetState} bDisabled={bDisableReset} />
     </Card>
   );
 };

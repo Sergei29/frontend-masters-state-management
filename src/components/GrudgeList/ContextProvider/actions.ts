@@ -30,3 +30,7 @@ export const actionUndoTheLast = (): ActionType => ({
 export const actionRedoTheLast = (): ActionType => ({
   type: ActionName.REDO_THE_LAST,
 });
+
+export const actionResetState = (): ActionType => ({
+  type: ActionName.RESET_STATE,
+});

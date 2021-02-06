@@ -11,16 +11,12 @@ import {
   actionToggleForgive,
   actionUndoTheLast,
   actionRedoTheLast,
+  actionResetState,
 } from "./actions";
 import reducer from "./reducer";
 import getStateFromLocalStorage from "../../../utils/getStateFromLocalStorage";
-import { GrudgeType, ContextStateType, StateType } from "../types/types";
-
-const INITIAL_STATE: StateType = {
-  past: [],
-  present: { grudges: [] },
-  future: [],
-};
+import { GrudgeType, ContextStateType } from "../types/types";
+import { INITIAL_STATE } from "./initialState";
 
 export const GrudgeContext = createContext<ContextStateType>(
   {} as ContextStateType
@@ -102,6 +98,15 @@ const ContextProvider: React.FC<Props> = ({ children }): JSX.Element => {
     dispatch(actionRedoTheLast());
   }, [dispatch]);
 
+  /**
+   * @description reset context state to initial
+   * @returns {undefined} fires an action, flushes local storage
+   */
+  const resetState = useCallback(() => {
+    localStorage.setItem("objState", JSON.stringify(INITIAL_STATE));
+    dispatch(actionResetState());
+  }, [dispatch]);
+
   return (
     <GrudgeContext.Provider
       value={{
@@ -111,6 +116,7 @@ const ContextProvider: React.FC<Props> = ({ children }): JSX.Element => {
         deleteGrudge,
         undoTheLast,
         redoTheLast,
+        resetState,
       }}
     >
       {children}

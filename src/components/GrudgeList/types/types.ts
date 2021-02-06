@@ -5,6 +5,7 @@ export enum ActionName {
   UPDATE_GRUDGE = "UPDATE_GRUDGE",
   UNDO_THE_LAST = "UNDO_THE_LAST",
   REDO_THE_LAST = "REDO_THE_LAST",
+  RESET_STATE = "RESET_STATE",
 }
 
 export type GrudgeType = {
@@ -36,6 +37,11 @@ export type StateType = {
   future: { grudges: GrudgeType[] }[];
 };
 
+export type ReducerType = (
+  objState: StateType,
+  objAction: ActionType
+) => StateType;
+
 export type ContextStateType = {
   objState: StateType;
   submitGrudge: (objGrudge: Partial<GrudgeType>) => void;
@@ -43,4 +49,5 @@ export type ContextStateType = {
   deleteGrudge: (strId: string) => void;
   undoTheLast: () => void;
   redoTheLast: () => void;
+  resetState: () => void;
 };
