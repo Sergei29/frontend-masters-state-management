@@ -1,3 +1,16 @@
+# Branches:
+
+- `master`: initial setup
+- `develop`: todo list ( redux/thunk, firebase REST DB)
+- `frontend-masters-state-management`:
+  - react state management ( local state basics),
+  - context API, contextAPI + reducer,
+  - contextAPI+reducer+thunk,
+  - undo-redo functionality for state management,
+  - Grudge List and
+  - StarWars API,
+  - Pagination component.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
