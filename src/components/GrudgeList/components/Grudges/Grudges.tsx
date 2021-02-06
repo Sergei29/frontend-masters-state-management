@@ -16,7 +16,8 @@ type Props = {
  * @returns {JSX} markup, list of grudges :)
  */
 const Grudges: React.FC<Props> = ({ classes }) => {
-  const { arrGrudges } = useContext(GrudgeContext);
+  const { objState } = useContext(GrudgeContext);
+  const { grudges: arrGrudges } = objState.present;
 
   return (
     <div className={classes.grudgeLIst__list}>

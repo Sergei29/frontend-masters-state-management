@@ -26,7 +26,7 @@ const OBJ_INITIAL_STATE = {
  * @returns {JSX} markup
  */
 const NewGrudgeForm: React.FC<Props> = ({ classes }): JSX.Element => {
-  const [objState, setObjState] = useState<GrudgeType>(OBJ_INITIAL_STATE);
+  const [objGrudge, setObjGrudge] = useState<GrudgeType>(OBJ_INITIAL_STATE);
   const { submitGrudge } = useContext(GrudgeContext);
 
   /**
@@ -36,7 +36,7 @@ const NewGrudgeForm: React.FC<Props> = ({ classes }): JSX.Element => {
    */
   const handleChange = (objEvt: ChangeEventType) => {
     const { name, value } = objEvt.target;
-    setObjState((prevState) => ({
+    setObjGrudge((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -50,14 +50,14 @@ const NewGrudgeForm: React.FC<Props> = ({ classes }): JSX.Element => {
   const handleSubmit = (objEvt: React.FormEvent) => {
     objEvt.preventDefault();
     if (
-      !objState.person ||
-      !objState.reason ||
-      objState.person.length === 0 ||
-      objState.reason.length === 0
+      !objGrudge.person ||
+      !objGrudge.reason ||
+      objGrudge.person.length === 0 ||
+      objGrudge.reason.length === 0
     )
       return;
-    submitGrudge(objState);
-    setObjState(OBJ_INITIAL_STATE);
+    submitGrudge(objGrudge);
+    setObjGrudge(OBJ_INITIAL_STATE);
   };
 
   return (
@@ -72,7 +72,7 @@ const NewGrudgeForm: React.FC<Props> = ({ classes }): JSX.Element => {
         variant="outlined"
         label="person"
         name="person"
-        value={objState?.person || ""}
+        value={objGrudge?.person || ""}
         onChange={handleChange}
       />
       <TextField
@@ -81,7 +81,7 @@ const NewGrudgeForm: React.FC<Props> = ({ classes }): JSX.Element => {
         label="reason"
         variant="outlined"
         name="reason"
-        value={objState?.reason || ""}
+        value={objGrudge?.reason || ""}
         onChange={handleChange}
       />
       <Button

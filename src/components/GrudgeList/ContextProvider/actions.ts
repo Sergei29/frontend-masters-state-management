@@ -22,3 +22,11 @@ export const actionToggleForgive = (strId: string): ActionType => ({
   type: ActionName.TOGGLE_FORGIVE_GRUDGE,
   payload: strId,
 });
+
+export const actionUndoTheLast = (): ActionType => ({
+  type: ActionName.UNDO_THE_LAST,
+});
+
+export const actionRedoTheLast = (): ActionType => ({
+  type: ActionName.REDO_THE_LAST,
+});

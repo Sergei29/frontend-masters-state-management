@@ -3,6 +3,8 @@ export enum ActionName {
   TOGGLE_FORGIVE_GRUDGE = "TOGGLE_FORGIVE_GRUDGE",
   DELETE_GRUDGE = "DELETE_GRUDGE",
   UPDATE_GRUDGE = "UPDATE_GRUDGE",
+  UNDO_THE_LAST = "UNDO_THE_LAST",
+  REDO_THE_LAST = "REDO_THE_LAST",
 }
 
 export type GrudgeType = {
@@ -28,9 +30,17 @@ export type ActionCreatorType = (
   strId?: string
 ) => ActionType;
 
+export type StateType = {
+  past: { grudges: GrudgeType[] }[];
+  present: { grudges: GrudgeType[] };
+  future: { grudges: GrudgeType[] }[];
+};
+
 export type ContextStateType = {
-  arrGrudges: GrudgeType[];
+  objState: StateType;
   submitGrudge: (objGrudge: Partial<GrudgeType>) => void;
   toggleForgive: (strId: string) => void;
   deleteGrudge: (strId: string) => void;
+  undoTheLast: () => void;
+  redoTheLast: () => void;
 };

@@ -9,13 +9,17 @@ import {
   actionAddNewGrudge,
   actionDeleteGrudge,
   actionToggleForgive,
+  actionUndoTheLast,
+  actionRedoTheLast,
 } from "./actions";
 import reducer from "./reducer";
 import getStateFromLocalStorage from "../../../utils/getStateFromLocalStorage";
-import { GrudgeType, ContextStateType } from "../types/types";
+import { GrudgeType, ContextStateType, StateType } from "../types/types";
 
-const INITIAL_STATE = {
-  grudges: [],
+const INITIAL_STATE: StateType = {
+  past: [],
+  present: { grudges: [] },
+  future: [],
 };
 
 export const GrudgeContext = createContext<ContextStateType>(
@@ -32,18 +36,17 @@ type Props = {
  * @returns {JSX} React Components with state provided
  */
 const ContextProvider: React.FC<Props> = ({ children }): JSX.Element => {
-  const [state, dispatch] = useReducer(
+  const [objState, dispatch] = useReducer(
     reducer,
-    getStateFromLocalStorage("state") || INITIAL_STATE
+    getStateFromLocalStorage("objState") || INITIAL_STATE
   );
-  const { grudges: arrGrudges } = state;
 
   /**
    * @description on change - saves state to local storage
    */
   useEffect(() => {
-    localStorage.setItem("state", JSON.stringify(state));
-  }, [state]);
+    localStorage.setItem("objState", JSON.stringify(objState));
+  }, [objState]);
 
   /**
    * @description submit form callback
@@ -83,9 +86,32 @@ const ContextProvider: React.FC<Props> = ({ children }): JSX.Element => {
     [dispatch]
   );
 
+  /**
+   * @description undo the last operation
+   * @returns {undefined} fires an action
+   */
+  const undoTheLast = useCallback(() => {
+    dispatch(actionUndoTheLast());
+  }, [dispatch]);
+
+  /**
+   * @description redo the last operation
+   * @returns {undefined} fires an action
+   */
+  const redoTheLast = useCallback(() => {
+    dispatch(actionRedoTheLast());
+  }, [dispatch]);
+
   return (
     <GrudgeContext.Provider
-      value={{ arrGrudges, submitGrudge, toggleForgive, deleteGrudge }}
+      value={{
+        objState,
+        submitGrudge,
+        toggleForgive,
+        deleteGrudge,
+        undoTheLast,
+        redoTheLast,
+      }}
     >
       {children}
     </GrudgeContext.Provider>
