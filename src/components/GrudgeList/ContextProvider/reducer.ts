@@ -62,28 +62,23 @@ const reducer: ReducerType = (objState = INITIAL_STATE, objAction) => {
       };
 
     case UNDO_THE_LAST:
-      const [objLastPast, ...arrRestOfPast] = objState.past;
-      const arrNewPast = objState.past.length > 0 ? [...arrRestOfPast] : [];
-      const objPresentUndone =
-        objState.past.length > 0 ? objLastPast : objState.present;
+      if (objState.past.length === 0) return objState;
+      const [objMostRecentPast, ...arrRestOfPast] = objState.past;
 
       return {
-        past: arrNewPast,
-        present: objPresentUndone,
+        past: arrRestOfPast,
+        present: objMostRecentPast,
         future: [objState.present, ...objState.future],
       };
 
     case REDO_THE_LAST:
-      const [objLastFuture, ...arrRestOfFuture] = objState.future;
-      const arrNewFuture =
-        objState.future.length > 0 ? [...arrRestOfFuture] : [];
-      const objPresentRedone =
-        objState.future.length > 0 ? objLastFuture : objState.present;
+      if (objState.future.length === 0) return objState;
+      const [objMostRecentFuture, ...arrRestOfFuture] = objState.future;
 
       return {
         past: [objState.present, ...objState.past],
-        present: objPresentRedone,
-        future: arrNewFuture,
+        present: objMostRecentFuture,
+        future: arrRestOfFuture,
       };
     default:
       return objState;
