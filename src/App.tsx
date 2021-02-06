@@ -9,27 +9,30 @@ import PaginationPage from "./pages/PaginationPage";
 import NewHtmlFeaturesPage from "./pages/NewHtmlFeaturesPage";
 import GrudgeListPage from "./pages/GrudgeListPage";
 import StarWarsPage from "./pages/StarWarsPage";
+import Main from "./containers/Main";
 
 function App() {
   return (
     <div className="App">
       <NavigationAppBar />
-      <Container>
-        <Switch>
-          <Route path="/" exact component={GrudgeListPage} />
-          <Route
-            path="/counter-class"
-            render={() => <CounterClassComponent max={15} step={5} />}
-          />
-          <Route
-            path="/counter-functional"
-            render={() => <CounterFuncComponent max={15} step={5} />}
-          />
-          <Route path="/pagination" component={PaginationPage} />
-          <Route path="/new-html-features" component={NewHtmlFeaturesPage} />
-          <Route path="/star-wars" component={StarWarsPage} />
-        </Switch>
-      </Container>
+      <Main>
+        <Container>
+          <Switch>
+            <Route path="/" exact component={GrudgeListPage} />
+            <Route
+              path="/counter-class"
+              render={() => <CounterClassComponent max={15} step={5} />}
+            />
+            <Route
+              path="/counter-functional"
+              render={() => <CounterFuncComponent max={15} step={5} />}
+            />
+            <Route path="/pagination" component={PaginationPage} />
+            <Route path="/new-html-features" component={NewHtmlFeaturesPage} />
+            <Route path="/star-wars" component={StarWarsPage} />
+          </Switch>
+        </Container>
+      </Main>
     </div>
   );
 }
