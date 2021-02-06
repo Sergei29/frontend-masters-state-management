@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { reducer, INIT_STATE } from "./reducer";
@@ -7,7 +7,8 @@ import { actionFetchCharacters } from "./actions";
 import useThunkReducer from "../../hooks/useThunkReducer";
 import { StateType } from "./types";
 //components:
-import CharacterDetails from "./components/CharacterDetails";
+import CharactersList from "./components/CharactersList";
+import CharacterView from "./components/CharacterView";
 //styles:
 import { style, ClassesType } from "./style";
 
@@ -21,7 +22,16 @@ type Props = {
  * @returns {JSX} markup, characters list
  */
 const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
+  /**
+   * @description local state
+   * @type {String} selected character's ID
+   */
   const [strSelectedId, setSelectedId] = useState("");
+
+  /**
+   * @description getting context state and thunked dispatcher
+   * @type {Object|Function} selected character's ID
+   */
   const { state, dispatch } = useThunkReducer(reducer, INIT_STATE);
 
   const { arrResults, bLoading, strError } = state as StateType;
@@ -34,45 +44,8 @@ const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
   const handleItemClick = (strId: string) => () => setSelectedId(strId);
 
   /**
-   * @description fetched results renderer
-   * @returns {JSX} markup
+   * @description fetch characters on mount
    */
-  const renderList = () =>
-    arrResults.length > 0 ? (
-      arrResults.map(({ uid, name }) => (
-        <Link
-          key={uid}
-          to={`/star-wars/${uid}`}
-          className={
-            strSelectedId === uid
-              ? classes.charactersItemSelected
-              : classes.charactersItem
-          }
-          onClick={handleItemClick(uid)}
-        >
-          {name}
-        </Link>
-      ))
-    ) : (
-      <Typography variant="subtitle1">No characters</Typography>
-    );
-
-  /**
-   * @description loader renderer
-   * @returns {JSX} markup
-   */
-  const renderLoader = () => (
-    <Typography variant="subtitle1">Loading...</Typography>
-  );
-
-  /**
-   * @description fetch error renderer
-   * @returns {JSX} markup
-   */
-  const renderError = () => (
-    <Typography variant="subtitle1">{strError}</Typography>
-  );
-
   useEffect(() => {
     dispatch(actionFetchCharacters());
   }, [dispatch]);
@@ -83,18 +56,21 @@ const StarWars: React.FC<Props> = ({ classes }): JSX.Element => {
         Star Wars Characters.
       </Typography>
       <div className={classes.charactersContainer}>
-        <div className={classes.charactersList}>
-          {bLoading
-            ? renderLoader()
-            : strError.length > 0
-            ? renderError()
-            : renderList()}
-        </div>
+        <CharactersList
+          arrCharacters={arrResults}
+          bLoading={bLoading}
+          strError={strError}
+          onCharacterClick={handleItemClick}
+          strSelectedId={strSelectedId}
+        />
         <div className={classes.currentDetails}>
-          {strSelectedId.length === 0 && (
-            <Typography align="center"> please, select a character</Typography>
+          {strSelectedId.length === 0 && bLoading === false && (
+            <Typography align="center" color="primary">
+              {" "}
+              please, select a character
+            </Typography>
           )}
-          <Route path="/star-wars/:id" component={CharacterDetails} />
+          <Route path="/star-wars/:id" component={CharacterView} />
         </div>
       </div>
     </div>

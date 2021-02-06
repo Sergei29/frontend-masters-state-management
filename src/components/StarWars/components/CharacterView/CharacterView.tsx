@@ -14,7 +14,7 @@ type Props = {
   classes: ClassesType;
 } & RouteComponentProps<ParamsType>;
 
-const CharacterDetails = ({ classes, match }: Props): JSX.Element => {
+const CharacterView = ({ classes, match }: Props): JSX.Element => {
   const { state, dispatch } = useThunkReducer(reducer, INIT_STATE);
 
   const { bLoading, strError, objSelectedHero } = state;
@@ -41,4 +41,4 @@ const CharacterDetails = ({ classes, match }: Props): JSX.Element => {
   );
 };
 
-export default withStyles(style)(CharacterDetails);
+export default withStyles(style)(CharacterView);
