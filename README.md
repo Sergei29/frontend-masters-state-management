@@ -10,6 +10,7 @@
   - Grudge List and
   - StarWars API,
   - Pagination component.
+  - custom hooks
 
 # Getting Started with Create React App
 
