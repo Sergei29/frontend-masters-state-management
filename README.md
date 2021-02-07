@@ -11,6 +11,7 @@
   - StarWars API,
   - Pagination component.
   - custom hooks
+  - form state managmement by `useReducer`
 
 # Getting Started with Create React App
 
