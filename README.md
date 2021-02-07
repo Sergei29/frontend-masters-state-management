@@ -10,6 +10,7 @@
   - Grudge List and
   - StarWars API,
   - Pagination component.
+  - Form state management by `useReducer`
 
 # Getting Started with Create React App
 
