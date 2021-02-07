@@ -9,6 +9,7 @@ import PaginationPage from "./pages/PaginationPage";
 import NewHtmlFeaturesPage from "./pages/NewHtmlFeaturesPage";
 import GrudgeListPage from "./pages/GrudgeListPage";
 import StarWarsPage from "./pages/StarWarsPage";
+import FormPage from "./pages/FormPage";
 import Main from "./containers/Main";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/pagination" component={PaginationPage} />
             <Route path="/new-html-features" component={NewHtmlFeaturesPage} />
             <Route path="/star-wars" component={StarWarsPage} />
+            <Route path="/form-state-managed" component={FormPage} />
           </Switch>
         </Container>
       </Main>

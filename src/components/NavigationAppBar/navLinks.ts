@@ -10,6 +10,12 @@ const navLinks = [
   { id: 4, name: "Pagination", path: "/pagination", exact: false },
   { id: 5, name: "New Html Feat", path: "/new-html-features", exact: false },
   { id: 6, name: "Star Wars", path: "/star-wars", exact: false },
+  {
+    id: 7,
+    name: "Form Managed State",
+    path: "/form-state-managed",
+    exact: false,
+  },
 ];
 
 export default navLinks;
