@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Container } from "@material-ui/core";
+import arrNavLinks from "./components/NavigationAppBar/navLinks";
 //components:
 import NavigationAppBar from "./components/NavigationAppBar";
 import CounterClassComponent from "./components/CounterClassComponent";
@@ -10,6 +11,7 @@ import NewHtmlFeaturesPage from "./pages/NewHtmlFeaturesPage";
 import GrudgeListPage from "./pages/GrudgeListPage";
 import StarWarsPage from "./pages/StarWarsPage";
 import FormPage from "./pages/FormPage";
+import SetStateWithCallbackPage from "./pages/SetStateWithCallbackPage";
 import Main from "./containers/Main";
 
 function App() {
@@ -29,9 +31,13 @@ function App() {
               render={() => <CounterFuncComponent max={15} step={5} />}
             />
             <Route path="/pagination" component={PaginationPage} />
-            <Route path="/new-html-features" component={NewHtmlFeaturesPage} />
-            <Route path="/star-wars" component={StarWarsPage} />
-            <Route path="/form-state-managed" component={FormPage} />
+            <Route path={arrNavLinks[4].path} component={NewHtmlFeaturesPage} />
+            <Route path={arrNavLinks[5].path} component={StarWarsPage} />
+            <Route path={arrNavLinks[6].path} component={FormPage} />
+            <Route
+              path={arrNavLinks[7].path}
+              component={SetStateWithCallbackPage}
+            />
           </Switch>
         </Container>
       </Main>

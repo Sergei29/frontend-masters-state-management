@@ -16,6 +16,12 @@ const navLinks = [
     path: "/form-state-managed",
     exact: false,
   },
+  {
+    id: 8,
+    name: "Set state with callback",
+    path: "/set-state-w-callback",
+    exact: false,
+  },
 ];
 
 export default navLinks;
