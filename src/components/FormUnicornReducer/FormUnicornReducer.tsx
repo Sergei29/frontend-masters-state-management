@@ -14,7 +14,6 @@ import { FormStateType } from "./types/types";
 import {
   filterIPCharacters,
   filterPortCharcters,
-  objRegex,
 } from "./helpers/validateIpOnInput";
 //styles:
 import { style, ClassesType } from "./style";
