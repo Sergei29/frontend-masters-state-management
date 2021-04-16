@@ -5,6 +5,8 @@ export enum ActionName {
 export type FormStateType = {
   userName: string;
   email: string;
+  ip_address: string;
+  port_number: string;
   password: string;
   confirmPassword: string;
   investmentInterest: string;
@@ -27,4 +29,9 @@ export type ReducerType = (
 export type ContextStateType = {
   objState: FormStateType;
   setObjState: (objState: FormStateType) => void;
+};
+
+export type ObjValidatonType = {
+  bIsValid: boolean;
+  strErrorMessage: string;
 };

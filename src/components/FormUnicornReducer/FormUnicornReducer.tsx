@@ -11,6 +11,11 @@ import {
 } from "@material-ui/core";
 import useForm from "./useForm";
 import { FormStateType } from "./types/types";
+import {
+  filterIPCharacters,
+  filterPortCharcters,
+  objRegex,
+} from "./helpers/validateIpOnInput";
 //styles:
 import { style, ClassesType } from "./style";
 
@@ -18,9 +23,14 @@ const objInitialState: FormStateType = {
   userName: "",
   email: "",
   password: "",
+  ip_address: "",
+  port_number: "",
   confirmPassword: "",
   investmentInterest: "",
 };
+
+const regexIP = `^([0-9]{1,3}\.){3}[0-9]{1,3}$`;
+const regexPort = `^[0-9]+$`;
 
 type Props = {
   classes: ClassesType;
@@ -39,6 +49,8 @@ const FormUnicornReducer = ({ classes }: Props): JSX.Element => {
   const {
     userName,
     email,
+    ip_address,
+    port_number,
     password,
     confirmPassword,
     investmentInterest,
@@ -52,9 +64,18 @@ const FormUnicornReducer = ({ classes }: Props): JSX.Element => {
     objEvent: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = objEvent.target;
+    let strTrimmedVal = value.trim();
+
+    if (name === "ip_address") {
+      strTrimmedVal = filterIPCharacters(strTrimmedVal);
+    }
+    if (name === "port_number") {
+      strTrimmedVal = filterPortCharcters(strTrimmedVal);
+    }
+
     setObjState({
       ...objState,
-      [name]: value,
+      [name]: strTrimmedVal,
     });
   };
 
@@ -105,6 +126,38 @@ const FormUnicornReducer = ({ classes }: Props): JSX.Element => {
             type="email"
             value={email}
             onChange={handleChange()}
+          />
+        </FormControl>
+        <FormControl className={classes.formContent__item}>
+          <TextField
+            variant="outlined"
+            name="ip_address"
+            label="IP Address"
+            type="text"
+            value={ip_address}
+            onChange={handleChange()}
+            inputProps={{
+              pattern: regexIP,
+              minLength: 7,
+              maxLength: 15,
+              size: 15,
+            }}
+          />
+        </FormControl>
+        <FormControl className={classes.formContent__item}>
+          <TextField
+            variant="outlined"
+            name="port_number"
+            label="Port number"
+            type="text"
+            value={port_number}
+            onChange={handleChange()}
+            inputProps={{
+              pattern: regexPort,
+              minLength: 1,
+              maxLength: 5,
+              size: 5,
+            }}
           />
         </FormControl>
         <FormControl className={classes.formContent__item}>
