@@ -22,6 +22,12 @@ const navLinks = [
     path: "/set-state-w-callback",
     exact: false,
   },
+  {
+    id: 9,
+    name: "Search Autocomplete",
+    path: "/search-autocomplete",
+    exact: false,
+  },
 ];
 
 export default navLinks;
