@@ -8,6 +8,10 @@ import { useStyles } from "./style";
 
 const STR_API_URL = "https://reqres.in/api";
 
+/**
+ * @description basic search autocompete component
+ * @returns {JSX} markup
+ */
 const SearchAutocomplete: React.FC = () => {
   const classes = useStyles();
   const statusRef = useRef({ willUnmount: false });

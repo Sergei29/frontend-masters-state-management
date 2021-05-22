@@ -8,6 +8,12 @@ type Props = {
   handleItemClick: (strValue: string) => void;
 };
 
+/**
+ * @description suggestions list
+ * @param {Array} {arrSuggestions list of sugggestions
+ * @param {Function} handleItemClick handle click on each suggestion item }
+ * @returns {JSX} markup
+ */
 const SuggestionsList: React.FC<Props> = ({
   arrSuggestions,
   handleItemClick,
