@@ -13,6 +13,7 @@ import StarWarsPage from "./pages/StarWarsPage";
 import FormPage from "./pages/FormPage";
 import SetStateWithCallbackPage from "./pages/SetStateWithCallbackPage";
 import SearchAutocompletePage from "./pages/SearchAutocompletePage";
+import ObservablePage from './pages/ObservablePage';
 import Main from "./containers/Main";
 
 function App() {
@@ -42,6 +43,10 @@ function App() {
             <Route
               path={arrNavLinks[8].path}
               component={SearchAutocompletePage}
+            />
+            <Route
+              path={arrNavLinks[9].path}
+              component={ObservablePage}
             />
           </Switch>
         </Container>

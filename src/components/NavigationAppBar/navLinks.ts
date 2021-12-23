@@ -28,6 +28,12 @@ const navLinks = [
     path: "/search-autocomplete",
     exact: false,
   },
+  {
+    id: 10,
+    name: "Observable",
+    path: "/observable-pattern",
+    exact: false,
+  },
 ];
 
 export default navLinks;
